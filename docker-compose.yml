@@ -1,0 +1,13 @@
+version: "2"
+services:
+  node-watchdog:
+    build:
+      context: .
+    container_name: node-watchdog
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    ports:
+      - 3000:8080
+    restart: unless-stopped
