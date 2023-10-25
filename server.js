@@ -17,9 +17,9 @@ const hostList = [{
 }, {
     name: 'savier-dns', type: 'dns', addr: '192.168.11.82'
 }, {
-    name: 'savier-ping', type: 'ping', addr: '192.168.11.82'
+    name: 'savier-ping', type: 'ping', addr: ['192.168.11.82']
 }, {
-    name: 'jeff-phone', type: 'multi-ping', addr: ['10.0.0.4', '10.1.0.101']
+    name: 'jeff-phone', type: 'ping', addr: ['10.0.0.4', '10.1.0.101']
 }]
 
 //APP
@@ -69,7 +69,7 @@ app.get('/watchdog/:host', (req, res) => {
                 .catch(function (error) {
                     // handle error
                     console.log(error.message);
-                    res.send(500);
+                    res.sendStatus(500);
                 });
             break;
         case 'dns':
@@ -85,26 +85,11 @@ app.get('/watchdog/:host', (req, res) => {
             });
             break;
         case 'ping':
-            ping.sys.probe(existingHost.addr, function (isAlive) {
-                var msg = isAlive ? 'host ' + host + ' is alive' : 'host ' + host + ' is dead';
-                console.log(msg);
-
-                if (isAlive) {
-                    res.sendStatus(200);
-                } else {
-                    res.send(500);
-                }
-
-            });
-
-            break;
-
-        case 'multi-ping':
             getResults();
             break;
         default:
             console.log('no lookup type');
-            res.send(500);
+            res.sendStatus(500);
     }
 
 
