@@ -119,7 +119,7 @@ app.get('/watchdog/:host', (req, res) => {
         console.log("All results", results);
 
         // check if all results are false, return 500 if all dead else 200 if one is alive
-        let isDead = results.every(result => result === false);
+        let isDead = results.every(result => result === 'false');
         console.log("isDead", isDead);
         if (isDead) {
             res.sendStatus(500);
