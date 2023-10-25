@@ -12,23 +12,15 @@ resolver.setServers(['192.168.11.82']);
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-const hostList = [
-    {
-        name: 'mwai-router',
-        type: 'https',
-        addr: 'http://10.0.160.170'
-    },
-    {
-        name: 'savier-dns',
-        type: 'dns',
-        addr: '192.168.11.82'
-    },
-    {
-        name: 'savier-ping',
-        type: 'ping',
-        addr: '192.168.11.82'
-    }
-]
+const hostList = [{
+    name: 'mwai-router', type: 'https', addr: 'http://10.0.160.170'
+}, {
+    name: 'savier-dns', type: 'dns', addr: '192.168.11.82'
+}, {
+    name: 'savier-ping', type: 'ping', addr: '192.168.11.82'
+}, {
+    name: 'jeff-phone', type: 'multi-ping', addr: ['10.0.0.4', '10.1.0.101']
+}]
 
 //APP
 const app = express();
@@ -107,9 +99,44 @@ app.get('/watchdog/:host', (req, res) => {
 
             break;
 
+        case 'multi-ping':
+            getResults();
+            break;
         default:
             console.log('no lookup type');
             res.send(500);
+    }
+
+
+    async function getResults() {
+        let results = [];
+
+        for (const address of existingHost.addr) {
+            let result = await processAddress(address);
+            console.log(result);
+            results.push(result);
+        }
+        console.log("All results", results);
+
+        // check if all results are false, return 500 if all dead else 200 if one is alive
+        let isDead = results.every(result => result === false);
+        console.log("isDead", isDead);
+        if (isDead) {
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(200);
+        }
+    }
+
+    function processAddress(address) {
+        return new Promise((resolve, reject) => {
+            ping.sys.probe(address, (isAlive) => {
+                if (isAlive) {
+                    resolve("true");
+                }
+                resolve("false");
+            })
+        })
     }
 });
 
