@@ -21,7 +21,7 @@ const hostList = [{
 }, {
     name: 'jeff-phone', type: 'ping', addr: ['10.0.0.4', '10.1.0.101', '10.1.2.11']
 }, {
-    name: 'jeff-windows-laptop', type: 'ping', addr: ['10.0.0.10', '10.1.0.102']
+    name: 'jeff-windows-laptop', type: 'ping', addr: ['10.0.0.10', '10.1.0.102','10.1.0.104']
 }]
 
 //APP
