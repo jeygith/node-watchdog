@@ -19,9 +19,9 @@ const hostList = [{
 }, {
     name: 'savier-ping', type: 'ping', addr: ['192.168.11.82']
 }, {
-    name: 'jeff-phone', type: 'ping', addr: ['10.0.0.4', '10.1.0.101', '10.1.2.11']
+    name: 'jeff-phone', type: 'ping', addr: ['10.0.10.4', '10.1.0.101', '10.1.2.11']
 }, {
-    name: 'jeff-windows-laptop', type: 'ping', addr: ['10.0.0.10', '10.1.0.102', '10.1.0.104']
+    name: 'jeff-windows-laptop', type: 'ping', addr: ['10.0.10.10', '10.1.0.102', '10.1.0.104']
 }, {
     name: 'safaricom-dns', type: 'dns', addr: '192.168.1.254'
 }, {
