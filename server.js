@@ -73,8 +73,7 @@ console.log(daysDifference);
     days: daysDifference,
     });
 
-    res.send(200);
-    
+   // res.send(200);
     return;
 
     
