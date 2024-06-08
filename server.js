@@ -61,11 +61,11 @@ app.get('/getDays/:date', (req, res) => {
 //alert(now);
 console.log(now);
 
-addMonth = moment(date).add(1,'months');
+let addMonth = moment(date).add(1,'months');
 
 console.log(addMonth);
 
-daysDifference = addMonth.diff(now, 'days')
+let daysDifference = addMonth.diff(now, 'days')
 
 console.log(daysDifference);
 
