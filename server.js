@@ -71,7 +71,7 @@ console.log(daysDifference);
 
     //res.json({daysDifference});
 
-   res.send(daysDifference).status(200);
+   res.end(daysDifference);
     return;
 
     
