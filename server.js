@@ -69,9 +69,9 @@ let daysDifference = addMonth.diff(now, 'days')
 
 console.log(daysDifference);
 
-    //res.json({daysDifference});
+    res.json({days:daysDifference});
 
-   res.end(daysDifference);
+   //res.end(daysDifference);
     return;
 
     
