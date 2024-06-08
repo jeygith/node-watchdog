@@ -6,6 +6,8 @@ const {Resolver} = require('dns');
 const dns = require("dns");
 var ping = require("ping");
 const resolver = new Resolver();
+const moment = require('moment');
+
 resolver.setServers(['192.168.11.82']);
 
 // constants
@@ -43,6 +45,39 @@ app.get('/', (req, res) => {
             console.log(error.message);
             res.send(500);
         })
+});
+
+app.get('/getDays/:date', (req, res) => {
+    let date = req.params.date
+    console.log(date);
+
+    if (!date || date.length == 0) {
+        console.log('empty request');
+        res.send(400);
+        return;
+    };
+
+    let now = moment(date);
+//alert(now);
+console.log(now);
+
+addMonth = moment(date).add(1,'months');
+
+console.log(addMonth);
+
+daysDifference = addMonth.diff(now, 'days')
+
+console.log(daysDifference);
+
+    res.json({ 
+    days: daysDifference,
+    });
+
+    res.send(200);
+    
+    return;
+
+    
 });
 
 app.get('/watchdog/:host', (req, res) => {
